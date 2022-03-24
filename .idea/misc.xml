@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/drawable/ctm_edittext.xml" value="0.20520833333333333" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/drawable/ctm_searchview.xml" value="0.20520833333333333" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/drawable/custom_searchview.xml" value="0.20520833333333333" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/drawable/item_note_background.xml" value="0.193" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/layout/activity_main.xml" value="0.18645833333333334" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/layout/fragment_add.xml" value="0.22" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/layout/fragment_list.xml" value="0.2" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/layout/fragment_update.xml" value="0.22" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/layout/item_note_layout.xml" value="0.21" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/menu-v26/menu_add.xml" value="0.1890625" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/menu/menu_add.xml" value="0.1890625" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/menu/menu_list.xml" value="0.1890625" />
+        <entry key="..\:/AndroidProject/MyNoteApp/app/src/main/res/menu/menu_update.xml" value="0.1890625" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/drawable/ctm_edittext.xml" value="0.193" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/layout/fragment_add.xml" value="0.22" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/layout/fragment_list.xml" value="0.25" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/layout/fragment_update.xml" value="0.18489583333333334" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/layout/item_note_layout.xml" value="0.25" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/menu/menu_list.xml" value="0.1675925925925926" />
+        <entry key="..\:/Project/AndroidProject/MyNoteApp/app/src/main/res/menu/menu_update.xml" value="0.18489583333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

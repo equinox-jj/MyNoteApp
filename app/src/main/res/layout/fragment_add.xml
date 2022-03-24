@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".view.fragments.add.AddFragment">
+
+    <EditText
+        android:id="@+id/etAddNoteTitle"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ctm_edittext"
+        android:ems="10"
+        android:hint="@string/title"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/ship_gray"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints="Title" />
+
+    <Spinner
+        android:id="@+id/sAddNote"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:entries="@array/spinner_priority"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etAddNoteTitle" />
+
+    <EditText
+        android:id="@+id/etAddNoteMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ctm_edittext"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/to_do"
+        android:inputType="textMultiLine"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/ship_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sAddNote"
+        android:autofillHints="Description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

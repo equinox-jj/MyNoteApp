@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="args"
+            type="com.mynoteapp.view.fragments.update.UpdateFragmentArgs" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp"
+        tools:context=".view.fragments.update.UpdateFragment">
+
+        <EditText
+            android:id="@+id/etUpdateNoteTitle"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:autofillHints="Title"
+            android:background="@drawable/ctm_edittext"
+            android:ems="10"
+            android:hint="@string/title"
+            android:inputType="text"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@{args.noteParcel.title}"
+            android:textColor="@color/black"
+            android:textColorHint="@color/ship_gray"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/sUpdateNote"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/transparent"
+            android:entries="@array/spinner_priority"
+            android:paddingStart="10dp"
+            android:parsePriorityToInt="@{args.noteParcel.priority}"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etUpdateNoteTitle" />
+
+        <EditText
+            android:id="@+id/etUpdateNoteDesc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:autofillHints="To Do"
+            android:background="@drawable/ctm_edittext"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="@string/to_do"
+            android:inputType="textMultiLine"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:text="@{args.noteParcel.description}"
+            android:textColor="@color/black"
+            android:textColorHint="@color/ship_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sUpdateNote" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MyNoteApp</string>
+    <string name="floating_action_button_add_notes">Floating Action Button Add Notes</string>
+    <string name="image_no_data">Image No Data</string>
+    <string name="no_notes_data">No Notes Data</string>
+    <string name="title">Title</string>
+    <string name="to_do">To Do</string>
+    <string name="sort_by">Sort By</string>
+    <string name="priority_high">Priority High</string>
+    <string name="priority_low">Priority Low</string>
+    <string name="check_add">Check Add</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="delete_all">Delete All</string>
+
+    <!-- SPINNER PRIORITY -->
+    <string-array name="spinner_priority">
+        <item>High Priority</item>
+        <item>Medium Priority</item>
+        <item>Low Priority</item>
+    </string-array>
+</resources>
