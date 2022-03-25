@@ -26,12 +26,6 @@ class BindingAdapter {
             }
         }
 
-        @BindingAdapter("android:test")
-        @JvmStatic
-        fun test() {
-
-        }
-
         @BindingAdapter("android:emptyDatabase")
         @JvmStatic
         fun emptyDatabase(view: View, emptyDatabase: MutableLiveData<Boolean>) {
