@@ -1,4 +1,4 @@
-# MyNoteApp ![example workflow](https://github.com/<OWNER>/<REPOSITORY>/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+# MyNoteApp 
 Kotlin Note App MVVM with Clean Architecture.
 
 # Build With:
