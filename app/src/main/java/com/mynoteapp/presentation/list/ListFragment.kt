@@ -1,8 +1,11 @@
-package com.mynoteapp.view.fragments.list
+package com.mynoteapp.presentation.list
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -14,37 +17,33 @@ import com.google.android.material.snackbar.Snackbar
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentListBinding
+import com.mynoteapp.presentation.ShareViewModel
+import com.mynoteapp.presentation.list.adapter.ListAdapter
 import com.mynoteapp.util.observeOnce
-import com.mynoteapp.view.ShareViewModel
-import com.mynoteapp.view.fragments.list.adapter.ListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
-class ListFragment : Fragment() {
+@AndroidEntryPoint
+class ListFragment : Fragment(R.layout.fragment_list) {
 
-    // View Model
-    private val mNoteViewModel: NoteViewModel by viewModels()
-    private val mShareViewModel: ShareViewModel by viewModels()
-
-    // Adapter
-    private val mListAdapter: ListAdapter by lazy { ListAdapter() }
-
-    // View Binding
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentListBinding.inflate(inflater, container, false)
+    private val mListAdapter: ListAdapter by lazy { ListAdapter() }
+
+    private val mNoteViewModel: NoteViewModel by viewModels()
+    private val mShareViewModel: ShareViewModel by viewModels()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentListBinding.bind(view)
+
         binding.lifecycleOwner = this
         binding.mSharedViewModel = mShareViewModel
-        setHasOptionsMenu(true)
 
         setupRecycler()
         setupViewModel()
         searchItem()
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -68,7 +67,6 @@ class ListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    // Show alert dialog to remove all note data.
     private fun confirmDelete() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete all data?")
@@ -90,16 +88,13 @@ class ListFragment : Fragment() {
         recyclerView.adapter = mListAdapter
         recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        // Recycler Animation
         recyclerView.itemAnimator = SlideInUpAnimator().apply {
             addDuration = 300
         }
         recyclerView.setHasFixedSize(true)
-        // Swipe Delete Item
         swipeToDelete(recyclerView)
     }
 
-    // Swipe To Delete Item
     private fun swipeToDelete(recyclerView: RecyclerView) {
         val swipeToDeleteCallback = object : SwipeToDelete() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -115,7 +110,6 @@ class ListFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
-    // Restore Delete Item
     private fun restoreDeleteItem(view: View, deletedItem: NoteData) {
         val snackBar = Snackbar.make(
             view, "Deleted '${deletedItem.title}'",
@@ -134,7 +128,6 @@ class ListFragment : Fragment() {
         }
     }
 
-    // SEARCH LISTENER
     private fun searchItem() {
         binding.svList.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -159,7 +152,6 @@ class ListFragment : Fragment() {
 
     private fun searchThroughDatabase(query: String) {
         val searchQuery = "%$query%"
-
         mNoteViewModel.searchDatabase(searchQuery).observeOnce(this) { list ->
             list?.let {
                 mListAdapter.setData(it)

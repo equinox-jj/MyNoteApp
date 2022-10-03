@@ -1,8 +1,11 @@
-package com.mynoteapp.view.fragments.update
+package com.mynoteapp.presentation.update
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,36 +14,27 @@ import androidx.navigation.fragment.navArgs
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentUpdateBinding
-import com.mynoteapp.view.ShareViewModel
-import com.mynoteapp.view.fragments.list.NoteViewModel
+import com.mynoteapp.presentation.ShareViewModel
+import com.mynoteapp.presentation.list.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class UpdateFragment : Fragment() {
+@AndroidEntryPoint
+class UpdateFragment : Fragment(R.layout.fragment_update) {
 
-    // View Binding
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
 
-    // Safe Args
-    private val args by navArgs<UpdateFragmentArgs>()
-
-    // View Model
     private val mShareViewModel: ShareViewModel by viewModels()
     private val mNoteViewModel: NoteViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragments
-        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+    private val args by navArgs<UpdateFragmentArgs>()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentUpdateBinding.bind(view)
+
         binding.args = args
-
-        // Activate Option Menu
-        setHasOptionsMenu(true)
-
         binding.sUpdateNote.onItemSelectedListener = mShareViewModel.listener
-
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

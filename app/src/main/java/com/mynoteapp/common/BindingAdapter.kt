@@ -1,4 +1,4 @@
-package com.mynoteapp.view
+package com.mynoteapp.common
 
 import android.view.View
 import android.widget.Spinner
@@ -11,7 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.data.model.NotePriority
-import com.mynoteapp.view.fragments.list.ListFragmentDirections
+import com.mynoteapp.presentation.list.ListFragmentDirections
 
 class BindingAdapter {
     companion object {

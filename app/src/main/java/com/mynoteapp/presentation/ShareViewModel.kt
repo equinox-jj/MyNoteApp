@@ -1,4 +1,4 @@
-package com.mynoteapp.view
+package com.mynoteapp.presentation
 
 import android.app.Application
 import android.view.View
@@ -10,7 +10,9 @@ import androidx.lifecycle.MutableLiveData
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.data.model.NotePriority
+import dagger.hilt.android.lifecycle.HiltViewModel
 
+@HiltViewModel
 class ShareViewModel(application: Application) : AndroidViewModel(application) {
 
     val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)

@@ -1,33 +1,69 @@
 package com.mynoteapp.data.repository
 
-import androidx.lifecycle.LiveData
-import com.mynoteapp.data.NoteDao
 import com.mynoteapp.data.model.NoteData
+import com.mynoteapp.data.source.local.ILocalDataSource
+import com.mynoteapp.domain.repository.INoteRepository
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class NoteRepository(private val noteDao: NoteDao) {
+class NoteRepository @Inject constructor(
+    private val localDataSource: ILocalDataSource,
+) : INoteRepository {
 
-    val getAllData: LiveData<List<NoteData>> = noteDao.getAllData()
-    val sortByHighPriority: LiveData<List<NoteData>> = noteDao.sortByHighPriority()
-    val sortByLowPriority: LiveData<List<NoteData>> = noteDao.sortByLowPriority()
+    //    val getAllData: LiveData<List<NoteData>> = noteDao.getAllData()
+//    val sortByHighPriority: LiveData<List<NoteData>> = noteDao.sortByHighPriority()
+//    val sortByLowPriority: LiveData<List<NoteData>> = noteDao.sortByLowPriority()
+//
+//    suspend fun insertData(noteData: NoteData) {
+//        noteDao.insertData(noteData)
+//    }
+//
+//    suspend fun updateData(noteData: NoteData) {
+//        noteDao.updateData(noteData)
+//    }
+//
+//    suspend fun deleteData(noteData: NoteData) {
+//        noteDao.deleteData(noteData)
+//    }
+//
+//    suspend fun deleteAll() {
+//        noteDao.deleteAll()
+//    }
+//
+//    fun searchDatabase(searchQuery: String): LiveData<List<NoteData>> {
+//        return noteDao.searchDatabase(searchQuery)
+//    }
 
-    suspend fun insertData(noteData: NoteData) {
-        noteDao.insertData(noteData)
+    override suspend fun getAllNote(): Flow<List<NoteData>> {
+        TODO("Not yet implemented")
     }
 
-    suspend fun updateData(noteData: NoteData) {
-        noteDao.updateData(noteData)
+    override suspend fun insertNote(noteData: NoteData) {
+        TODO("Not yet implemented")
     }
 
-    suspend fun deleteData(noteData: NoteData) {
-        noteDao.deleteData(noteData)
+    override suspend fun updateNote(noteData: NoteData) {
+        TODO("Not yet implemented")
     }
 
-    suspend fun deleteAll() {
-        noteDao.deleteAll()
+    override suspend fun deleteNote(noteData: NoteData) {
+        TODO("Not yet implemented")
     }
 
-    fun searchDatabase(searchQuery: String): LiveData<List<NoteData>> {
-        return noteDao.searchDatabase(searchQuery)
+    override suspend fun deleteAllNote() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun searchNote(query: String): Flow<List<NoteData>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun sortByHighPriority(): Flow<List<NoteData>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun sortByLowPriority(): Flow<List<NoteData>> {
+        TODO("Not yet implemented")
     }
 
 }

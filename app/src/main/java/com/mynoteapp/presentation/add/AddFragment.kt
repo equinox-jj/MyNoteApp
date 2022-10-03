@@ -1,7 +1,10 @@
-package com.mynoteapp.view.fragments.add
+package com.mynoteapp.presentation.add
 
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -9,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentAddBinding
-import com.mynoteapp.view.ShareViewModel
-import com.mynoteapp.view.fragments.list.NoteViewModel
+import com.mynoteapp.presentation.ShareViewModel
+import com.mynoteapp.presentation.list.NoteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class AddFragment : Fragment() {
+@AndroidEntryPoint
+class AddFragment : Fragment(R.layout.fragment_add) {
 
     // View Binding
     private var _binding: FragmentAddBinding? = null
@@ -22,19 +27,11 @@ class AddFragment : Fragment() {
     private val mNoteViewModel: NoteViewModel by viewModels()
     private val mShareViewModel: ShareViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragments
-        _binding = FragmentAddBinding.inflate(inflater, container, false)
-        /** CODE HERE*/
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentAddBinding.bind(view)
 
-        // ACTIVATE OPTION MENU
-        setHasOptionsMenu(true)
         binding.sAddNote.onItemSelectedListener = mShareViewModel.listener
-
-        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

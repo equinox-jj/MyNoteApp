@@ -1,4 +1,4 @@
-package com.mynoteapp.view.fragments.list
+package com.mynoteapp.presentation.list
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

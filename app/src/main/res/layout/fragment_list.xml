@@ -7,14 +7,14 @@
 
         <variable
             name="mSharedViewModel"
-            type="com.mynoteapp.view.ShareViewModel" />
+            type="com.mynoteapp.presentation.ShareViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clFragmentList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.fragments.list.ListFragment">
+        tools:context=".presentation.list.ListFragment">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/svList"

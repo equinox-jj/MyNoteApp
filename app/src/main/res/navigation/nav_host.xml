@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.mynoteapp.view.fragments.list.ListFragment"
+        android:name="com.mynoteapp.presentation.list.ListFragment"
         android:label="To Do List"
         tools:layout="@layout/fragment_list">
         <action
@@ -28,7 +28,7 @@
 
     <fragment
         android:id="@+id/addFragment"
-        android:name="com.mynoteapp.view.fragments.add.AddFragment"
+        android:name="com.mynoteapp.presentation.add.AddFragment"
         android:label="Add Note"
         tools:layout="@layout/fragment_add">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.mynoteapp.view.fragments.update.UpdateFragment"
+        android:name="com.mynoteapp.presentation.update.UpdateFragment"
         android:label="Update Note"
         tools:layout="@layout/fragment_update">
         <action

@@ -1,4 +1,4 @@
-package com.mynoteapp.data
+package com.mynoteapp.data.source.local.db
 
 import androidx.room.TypeConverter
 import com.mynoteapp.data.model.NotePriority

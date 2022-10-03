@@ -7,14 +7,14 @@
 
         <variable
             name="args"
-            type="com.mynoteapp.view.fragments.update.UpdateFragmentArgs" />
+            type="com.mynoteapp.presentation.fragments.update.UpdateFragmentArgs" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="24dp"
-        tools:context=".view.fragments.update.UpdateFragment">
+        tools:context=".presentation.update.UpdateFragment">
 
         <EditText
             android:id="@+id/etUpdateNoteTitle"
