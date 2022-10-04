@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -24,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 @AndroidEntryPoint
-class ListFragment : Fragment(R.layout.fragment_list) {
+class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
@@ -41,30 +42,47 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.lifecycleOwner = this
         binding.mSharedViewModel = mShareViewModel
 
+//        val menuHost: MenuHost = requireActivity()
+//        menuHost.addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.menu_list, menu)
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                when (menuItem.itemId) {
+//                    R.id.menu_delete_all -> confirmDelete()
+//                    R.id.p_high_item -> mNoteViewModel.sortByHighPriority.observe(viewLifecycleOwner) {
+//                        mListAdapter.setData(it)
+//                    }
+//                    R.id.p_low_item -> mNoteViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
+//                        mListAdapter.setData(it)
+//                    }
+//                }
+//                return true
+//            }
+//
+//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
         setupRecycler()
         setupViewModel()
         searchItem()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_list, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_list, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
             R.id.menu_delete_all -> confirmDelete()
-            R.id.p_high_item -> mNoteViewModel.sortByHighPriority.observe(this) {
-                mListAdapter.setData(
-                    it
-                )
+            R.id.p_high_item -> mNoteViewModel.sortByHighPriority.observe(viewLifecycleOwner) {
+                mListAdapter.setData(it)
             }
-            R.id.p_low_item -> mNoteViewModel.sortByLowPriority.observe(this) {
-                mListAdapter.setData(
-                    it
-                )
+            R.id.p_low_item -> mNoteViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
+                mListAdapter.setData(it)
             }
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     private fun confirmDelete() {
@@ -99,10 +117,10 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         val swipeToDeleteCallback = object : SwipeToDelete() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val deletedItem = mListAdapter.noteData[viewHolder.adapterPosition]
-                // Delete Item
+
                 mNoteViewModel.deleteData(deletedItem)
                 mListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
-                // Restore Deleted Item
+
                 restoreDeleteItem(viewHolder.itemView, deletedItem)
             }
         }

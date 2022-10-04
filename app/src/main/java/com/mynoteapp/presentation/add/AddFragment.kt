@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,7 +18,7 @@ import com.mynoteapp.presentation.list.NoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddFragment : Fragment(R.layout.fragment_add) {
+class AddFragment : Fragment(R.layout.fragment_add), MenuProvider {
 
     // View Binding
     private var _binding: FragmentAddBinding? = null
@@ -34,15 +35,15 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         binding.sAddNote.onItemSelectedListener = mShareViewModel.listener
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_add, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_add, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.check_add_item) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == R.id.check_add_item) {
             insertDataToDatabase()
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     private fun insertDataToDatabase() {
@@ -68,6 +69,5 @@ class AddFragment : Fragment(R.layout.fragment_add) {
         }
 
     }
-
 
 }

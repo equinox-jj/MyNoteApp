@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,7 +20,7 @@ import com.mynoteapp.presentation.list.NoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UpdateFragment : Fragment(R.layout.fragment_update) {
+class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
 
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
@@ -35,14 +36,16 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
 
         binding.args = args
         binding.sUpdateNote.onItemSelectedListener = mShareViewModel.listener
+
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_update, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_update, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
             R.id.menu_update_save -> updateNote()
             R.id.menu_update_delete -> deleteNote()
         }
@@ -51,7 +54,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
 //        } else if (item.itemId == R.id.menu_update_delete) {
 //            deleteNote()
 //        }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
     private fun updateNote() {
@@ -100,4 +103,5 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
         super.onDestroyView()
         _binding = null
     }
+
 }
