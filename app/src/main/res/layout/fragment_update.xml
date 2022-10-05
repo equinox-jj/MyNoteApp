@@ -5,9 +5,7 @@
 
     <data>
 
-        <variable
-            name="args"
-            type="com.mynoteapp.presentation.fragments.update.UpdateFragmentArgs" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,13 +19,12 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:autofillHints="Title"
-            android:background="@drawable/ctm_edittext"
+            android:background="@drawable/bg_edittext"
             android:ems="10"
             android:hint="@string/title"
             android:inputType="text"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:text="@{args.noteParcel.title}"
             android:textColor="@color/black"
             android:textColorHint="@color/ship_gray"
             android:textSize="16sp"
@@ -45,7 +42,6 @@
             android:background="@android:color/transparent"
             android:entries="@array/spinner_priority"
             android:paddingStart="10dp"
-            android:parsePriorityToInt="@{args.noteParcel.priority}"
             android:paddingEnd="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -57,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:autofillHints="To Do"
-            android:background="@drawable/ctm_edittext"
+            android:background="@drawable/bg_edittext"
             android:ems="10"
             android:gravity="start|top"
             android:hint="@string/to_do"
@@ -66,7 +62,6 @@
             android:paddingTop="10dp"
             android:paddingEnd="20dp"
             android:paddingBottom="10dp"
-            android:text="@{args.noteParcel.description}"
             android:textColor="@color/black"
             android:textColorHint="@color/ship_gray"
             app:layout_constraintBottom_toBottomOf="parent"

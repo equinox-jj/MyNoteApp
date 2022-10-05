@@ -52,16 +52,14 @@ class AddFragment : Fragment(R.layout.fragment_add), MenuProvider {
         val mDesc = binding.etAddNoteMultiLine.text.toString()
         val validation = mShareViewModel.verifyDataFromUser(mTitle, mDesc)
         if (validation) {
-            // insert data to database
             val newData = NoteData(
                 0,
                 mTitle,
-                mShareViewModel.parsePriority(mPriority),
-                mDesc
+                mDesc,
+                mShareViewModel.parsePriority(mPriority)
             )
             mNoteViewModel.insertData(newData)
             Toast.makeText(requireContext(), "Successfully added.", Toast.LENGTH_SHORT).show()
-            // Navigate Back
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_SHORT)

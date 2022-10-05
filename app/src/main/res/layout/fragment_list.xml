@@ -16,17 +16,18 @@
         android:layout_height="match_parent"
         tools:context=".presentation.list.ListFragment">
 
-        <androidx.appcompat.widget.SearchView
+        <SearchView
             android:id="@+id/svList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="10dp"
-            android:background="@drawable/ctm_searchview"
+            android:background="@drawable/bg_searchview"
             android:iconifiedByDefault="false"
             android:queryBackground="@android:color/transparent"
             android:queryHint="Search..."
+            android:searchIcon="@drawable/ic_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

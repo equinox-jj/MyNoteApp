@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.mynoteapp.common.Constants.NOTE_DB_NAME
 import com.mynoteapp.data.source.local.db.NoteDatabase
+import com.mynoteapp.domain.repository.INoteRepository
+import com.mynoteapp.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,5 +30,20 @@ object AppModule {
     @Singleton
     @Provides
     fun providesNoteDao(database: NoteDatabase) = database.noteDao()
+
+    @Singleton
+    @Provides
+    fun providesUseCase(repository: INoteRepository): UseCase {
+        return UseCase(
+            getAllNoteUseCase = GetAllNoteUseCase(repository),
+            insertNoteUseCase = InsertNoteUseCase(repository),
+            searchNoteUseCase = SearchNoteUseCase(repository),
+            deleteAllNoteUseCase = DeleteAllNoteUseCase(repository),
+            deleteNoteUseCase = DeleteNoteUseCase(repository),
+            updateNoteUseCase = UpdateNoteUseCase(repository),
+            sortByHighPriorityUseCase = SortByHighPriorityUseCase(repository),
+            sortByLowPriorityUseCase = SortByLowPriorityUseCase(repository)
+        )
+    }
 
 }

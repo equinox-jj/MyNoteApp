@@ -6,8 +6,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,7 +20,6 @@ import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentListBinding
 import com.mynoteapp.presentation.ShareViewModel
 import com.mynoteapp.presentation.list.adapter.ListAdapter
-import com.mynoteapp.util.observeOnce
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
@@ -42,27 +41,6 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
         binding.lifecycleOwner = this
         binding.mSharedViewModel = mShareViewModel
 
-//        val menuHost: MenuHost = requireActivity()
-//        menuHost.addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menuInflater.inflate(R.menu.menu_list, menu)
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                when (menuItem.itemId) {
-//                    R.id.menu_delete_all -> confirmDelete()
-//                    R.id.p_high_item -> mNoteViewModel.sortByHighPriority.observe(viewLifecycleOwner) {
-//                        mListAdapter.setData(it)
-//                    }
-//                    R.id.p_low_item -> mNoteViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
-//                        mListAdapter.setData(it)
-//                    }
-//                }
-//                return true
-//            }
-//
-//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
         setupRecycler()
         setupViewModel()
         searchItem()
@@ -75,14 +53,14 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         when (menuItem.itemId) {
             R.id.menu_delete_all -> confirmDelete()
-            R.id.p_high_item -> mNoteViewModel.sortByHighPriority.observe(viewLifecycleOwner) {
-                mListAdapter.setData(it)
+            R.id.p_high_item -> {
+//                mListAdapter.setData(it)
             }
-            R.id.p_low_item -> mNoteViewModel.sortByLowPriority.observe(viewLifecycleOwner) {
-                mListAdapter.setData(it)
+            R.id.p_low_item -> {
+//                mListAdapter.setData(it)
             }
         }
-        return true
+        return false
     }
 
     private fun confirmDelete() {
@@ -140,10 +118,10 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
     }
 
     private fun setupViewModel() {
-        mNoteViewModel.getAllData.observe(viewLifecycleOwner) { data ->
-            mShareViewModel.checkIfDatabaseEmpty(data)
-            mListAdapter.setData(data)
-        }
+//        mNoteViewModel.getAllData.observe(viewLifecycleOwner) { data ->
+//            mShareViewModel.checkIfDatabaseEmpty(data)
+//            mListAdapter.setData(data)
+//        }
     }
 
     private fun searchItem() {
@@ -170,11 +148,11 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
 
     private fun searchThroughDatabase(query: String) {
         val searchQuery = "%$query%"
-        mNoteViewModel.searchDatabase(searchQuery).observeOnce(this) { list ->
-            list?.let {
-                mListAdapter.setData(it)
-            }
-        }
+//        mNoteViewModel.searchDatabase(searchQuery).observeOnce(this) { list ->
+//            list?.let {
+//                mListAdapter.setData(it)
+//            }
+//        }
     }
 
 }

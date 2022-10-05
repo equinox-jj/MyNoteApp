@@ -6,13 +6,13 @@ import com.mynoteapp.data.model.NotePriority
 class NoteConverter {
 
     @TypeConverter
-    fun fromPriority(priority: NotePriority): String { // to convert priority to string
-        return priority.name
+    fun fromPriority(notePriority: NotePriority): String {
+        return notePriority.name
     }
 
     @TypeConverter
-    fun toPriority(priority: String): NotePriority { // to convert string to priority
-        return NotePriority.valueOf(priority)
+    fun toPriority(string: String): NotePriority {
+        return NotePriority.valueOf(string)
     }
 
 }

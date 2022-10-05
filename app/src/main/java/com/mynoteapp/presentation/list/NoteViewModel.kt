@@ -1,54 +1,74 @@
 package com.mynoteapp.presentation.list
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mynoteapp.data.model.NoteData
-import com.mynoteapp.data.repository.NoteRepository
-import com.mynoteapp.data.source.local.db.NoteDatabase
+import com.mynoteapp.domain.usecase.UseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NoteViewModel(application: Application) : AndroidViewModel(application) {
+class NoteViewModel @Inject constructor(
+    private val useCase: UseCase,
+) : ViewModel() {
 
-    private val noteDao = NoteDatabase.getDatabase(application).noteDao()
-    private val noteRepository: NoteRepository = NoteRepository(noteDao)
-    val getAllData: LiveData<List<NoteData>> = noteRepository.getAllData
-    val sortByHighPriority: LiveData<List<NoteData>>
-    val sortByLowPriority: LiveData<List<NoteData>>
+//    private val _getAllNote = MutableStateFlow<>()
+//    val getAllNote: StateFlow<> = _getAllNote
+//
+//    private val _insertNote = MutableStateFlow<>()
+//    val insertNote: StateFlow<> = _insertNote
+//
+//    private val _updateNote = MutableStateFlow<>()
+//    val updateNote: StateFlow<> = _updateNote
+//
+//    private val _deleteNote = MutableStateFlow<>()
+//    val deleteNote: StateFlow<> = _deleteNote
+//
+//    private val _deleteAllNote = MutableStateFlow<>()
+//    val deleteAllNote: StateFlow<> = _deleteAllNote
+//
+//    private val _searchNote = MutableStateFlow<>()
+//    val searchNote: StateFlow<> = _searchNote
+//
+//    private var _sortByHighPriority = MutableStateFlow<>()
+//    val sortByHighPriority: StateFlow<> = _sortByHighPriority
+//
+//    private var _sortByLowPriority = MutableStateFlow<>()
+//    val sortByLowPriority: StateFlow<> = _sortByLowPriority
 
     init {
-        sortByHighPriority = noteRepository.sortByHighPriority
-        sortByLowPriority = noteRepository.sortByLowPriority
+        viewModelScope.launch {
+//            _sortByLowPriority = sortByHighPriorityUseCase.invoke()
+//            _sortByHighPriority = sortByLowPriorityUseCase.invoke()
+        }
     }
 
     fun insertData(noteData: NoteData) {
         viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.insertData(noteData)
+//            noteRepository.insertData(noteData)
         }
     }
 
     fun updateData(noteData: NoteData) {
         viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.updateData(noteData)
+//            noteRepository.updateData(noteData)
         }
     }
 
     fun deleteData(noteData: NoteData) {
         viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.deleteData(noteData)
+//            noteRepository.deleteData(noteData)
         }
     }
 
     fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
-            noteRepository.deleteAll()
+//            noteRepository.deleteAll()
         }
     }
 
-    fun searchDatabase(searchQuery: String): LiveData<List<NoteData>> {
-        return noteRepository.searchDatabase(searchQuery)
-    }
+//    fun searchDatabase(searchQuery: String): LiveData<List<NoteData>> {
+//        return noteRepository.searchDatabase(searchQuery)
+//    }
 
 }

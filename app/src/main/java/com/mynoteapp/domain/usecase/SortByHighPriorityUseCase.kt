@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SortByHighPriorityUseCase @Inject constructor(private val noteRepository: INoteRepository) {
-    suspend operator fun invoke(): Flow<List<NoteData>> = noteRepository.sortByHighPriority()
+    operator fun invoke(): Flow<List<NoteData>> = noteRepository.sortByHighPriority()
 }

@@ -34,8 +34,8 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentUpdateBinding.bind(view)
 
-        binding.args = args
-        binding.sUpdateNote.onItemSelectedListener = mShareViewModel.listener
+//        binding.args = args
+//        binding.sUpdateNote.onItemSelectedListener = mShareViewModel.listener
 
 
     }
@@ -54,7 +54,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
 //        } else if (item.itemId == R.id.menu_update_delete) {
 //            deleteNote()
 //        }
-        return true
+        return false
     }
 
     private fun updateNote() {
@@ -64,12 +64,11 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
 
         val validation = mShareViewModel.verifyDataFromUser(title, descNote)
         if (validation) {
-            // Update Note Data
             val updateNoteData = NoteData(
                 args.noteParcel.id,
                 title,
-                mShareViewModel.parsePriority(getPriority),
-                descNote
+                descNote,
+                mShareViewModel.parsePriority(getPriority)
             )
             mNoteViewModel.updateData(updateNoteData)
             Toast.makeText(requireContext(), "Successfully Updated.", Toast.LENGTH_LONG).show()

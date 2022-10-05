@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
 
     @Query("SELECT * FROM note_table ORDER BY id ASC")
-    suspend fun getAllData(): Flow<List<NoteData>>
+    fun getAllData(): Flow<List<NoteData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(noteData: NoteData)
@@ -23,11 +23,11 @@ interface NoteDao {
     suspend fun deleteAll()
 
     @Query("SELECT * FROM note_table WHERE title LIKE :searchQuery")
-    suspend fun searchDatabase(searchQuery: String): Flow<List<NoteData>>
+    fun searchDatabase(searchQuery: String): Flow<List<NoteData>>
 
     @Query("SELECT * FROM note_table ORDER BY CASE WHEN priority LIKE 'H%' THEN 1 WHEN priority LIKE 'M%' THEN 2 WHEN priority LIKE 'L%' THEN 3 END")
-    suspend fun sortByHighPriority(): Flow<List<NoteData>>
+    fun sortByHighPriority(): Flow<List<NoteData>>
 
     @Query("SELECT * FROM note_table ORDER BY CASE WHEN priority LIKE 'L%' THEN 1 WHEN priority LIKE 'M%' THEN 2 WHEN priority LIKE 'H%' THEN 3 END")
-    suspend fun sortByLowPriority(): Flow<List<NoteData>>
+    fun sortByLowPriority(): Flow<List<NoteData>>
 }

@@ -11,21 +11,22 @@
         android:id="@+id/etAddNoteTitle"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@drawable/ctm_edittext"
+        android:autofillHints="Title"
+        android:background="@drawable/bg_edittext"
         android:ems="10"
+        android:fontFamily="@font/nunito_bold"
         android:hint="@string/title"
-        android:inputType="text"
+        android:inputType="textCapSentences"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/ship_gray"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="Title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/sAddNote"
@@ -45,8 +46,10 @@
         android:id="@+id/etAddNoteMultiLine"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/ctm_edittext"
+        android:autofillHints="Description"
+        android:background="@drawable/bg_edittext"
         android:ems="10"
+        android:fontFamily="@font/nunito_medium"
         android:gravity="start|top"
         android:hint="@string/to_do"
         android:inputType="textMultiLine"
@@ -56,11 +59,11 @@
         android:paddingBottom="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/ship_gray"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sAddNote"
-        android:autofillHints="Description" />
+        app:layout_constraintTop_toBottomOf="@+id/sAddNote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

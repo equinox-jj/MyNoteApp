@@ -10,9 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.data.model.NotePriority
-import dagger.hilt.android.lifecycle.HiltViewModel
 
-@HiltViewModel
 class ShareViewModel(application: Application) : AndroidViewModel(application) {
 
     val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -56,8 +54,8 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
 
     fun verifyDataFromUser(
         title: String,
-        description: String
-    ): Boolean { // to check the data is empty or not
+        description: String,
+    ): Boolean {
         return !(title.isEmpty() || description.isEmpty())
     }
 
@@ -65,7 +63,7 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
         return when (priority) {
             "High Priority" -> {
                 NotePriority.HIGH
-            } // if priority has value High, it will return high
+            }
             "Medium Priority" -> {
                 NotePriority.MEDIUM
             }

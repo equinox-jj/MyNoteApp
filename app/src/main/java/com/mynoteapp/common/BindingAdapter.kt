@@ -3,7 +3,6 @@ package com.mynoteapp.common
 import android.view.View
 import android.widget.Spinner
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -70,7 +69,7 @@ class BindingAdapter {
 
         @BindingAdapter("android:sendDataToUpdateFragment")
         @JvmStatic
-        fun sendDataToUpdateFragment(view: ConstraintLayout, noteData: NoteData) {
+        fun sendDataToUpdateFragment(view: CardView, noteData: NoteData) {
             view.setOnClickListener {
                 val action = ListFragmentDirections.actionListFragmentToUpdateFragment(noteData)
                 view.findNavController().navigate(action)
