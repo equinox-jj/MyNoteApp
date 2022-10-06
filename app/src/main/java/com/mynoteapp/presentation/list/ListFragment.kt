@@ -8,59 +8,71 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.mynoteapp.R
+import com.mynoteapp.common.observeOnce
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentListBinding
+import com.mynoteapp.presentation.NoteViewModel
 import com.mynoteapp.presentation.ShareViewModel
 import com.mynoteapp.presentation.list.adapter.ListAdapter
+import com.mynoteapp.presentation.list.listener.SwipeToDelete
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 @AndroidEntryPoint
-class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
+class ListFragment : Fragment(R.layout.fragment_list) {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    private val mListAdapter: ListAdapter by lazy { ListAdapter() }
+    private val noteAdapter: ListAdapter by lazy { ListAdapter() }
 
-    private val mNoteViewModel: NoteViewModel by viewModels()
-    private val mShareViewModel: ShareViewModel by viewModels()
+    private val noteVm: NoteViewModel by viewModels()
+    private val sharedVm: ShareViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentListBinding.bind(view)
 
-        binding.lifecycleOwner = this
-        binding.mSharedViewModel = mShareViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.sharedVm = sharedVm
 
+        setupMenu()
         setupRecycler()
         setupViewModel()
         searchItem()
+
     }
 
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu_list, menu)
-    }
+    private fun setupMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_list, menu)
+            }
 
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
-            R.id.menu_delete_all -> confirmDelete()
-            R.id.p_high_item -> {
-//                mListAdapter.setData(it)
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                when (menuItem.itemId) {
+                    R.id.menu_delete_all -> confirmDelete()
+                    R.id.p_high_item -> {
+//                        mListAdapter.setData(it)
+                    }
+                    R.id.p_low_item -> {
+//                        mListAdapter.setData(it)
+                    }
+                }
+                return true
             }
-            R.id.p_low_item -> {
-//                mListAdapter.setData(it)
-            }
-        }
-        return false
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun confirmDelete() {
@@ -68,7 +80,7 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
         builder.setTitle("Delete all data?")
         builder.setMessage("Are you sure you want to remove all data?")
         builder.setPositiveButton("Yes") { _, _ ->
-            mNoteViewModel.deleteAll()
+            noteVm.deleteAll()
             Toast.makeText(
                 requireContext(),
                 "Successfully Removed All Data",
@@ -81,7 +93,7 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
 
     private fun setupRecycler() {
         val recyclerView = binding.rvListFragment
-        recyclerView.adapter = mListAdapter
+        recyclerView.adapter = noteAdapter
         recyclerView.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recyclerView.itemAnimator = SlideInUpAnimator().apply {
@@ -94,10 +106,10 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
     private fun swipeToDelete(recyclerView: RecyclerView) {
         val swipeToDeleteCallback = object : SwipeToDelete() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val deletedItem = mListAdapter.noteData[viewHolder.adapterPosition]
+                val deletedItem = noteAdapter.noteData[viewHolder.adapterPosition]
 
-                mNoteViewModel.deleteData(deletedItem)
-                mListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                noteVm.deleteData(deletedItem)
+                noteAdapter.notifyItemRemoved(viewHolder.adapterPosition)
 
                 restoreDeleteItem(viewHolder.itemView, deletedItem)
             }
@@ -112,16 +124,17 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
             Snackbar.LENGTH_LONG
         )
         snackBar.setAction("Undo") {
-            mNoteViewModel.insertData(deletedItem)
+            noteVm.insertData(deletedItem)
         }
         snackBar.show()
     }
 
     private fun setupViewModel() {
-//        mNoteViewModel.getAllData.observe(viewLifecycleOwner) { data ->
-//            mShareViewModel.checkIfDatabaseEmpty(data)
-//            mListAdapter.setData(data)
-//        }
+        noteVm.getAllData()
+        noteVm.getAllData.observe(viewLifecycleOwner) { data ->
+            sharedVm.checkIfDatabaseEmpty(data)
+            noteAdapter.setData(data)
+        }
     }
 
     private fun searchItem() {
@@ -148,11 +161,12 @@ class ListFragment : Fragment(R.layout.fragment_list), MenuProvider {
 
     private fun searchThroughDatabase(query: String) {
         val searchQuery = "%$query%"
-//        mNoteViewModel.searchDatabase(searchQuery).observeOnce(this) { list ->
-//            list?.let {
-//                mListAdapter.setData(it)
-//            }
-//        }
+        noteVm.searchNote(searchQuery)
+        noteVm.searchNote.observeOnce(viewLifecycleOwner) { list ->
+            list?.let {
+                noteAdapter.setData(it)
+            }
+        }
     }
 
 }

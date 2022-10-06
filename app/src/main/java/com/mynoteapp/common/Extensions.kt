@@ -1,4 +1,4 @@
-package com.mynoteapp.util
+package com.mynoteapp.common
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

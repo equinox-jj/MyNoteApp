@@ -21,14 +21,12 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding =
-            ItemNoteLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemNoteLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = noteData[position]
-        holder.bind(currentItem)
+        holder.bind(noteData[position])
     }
 
     override fun getItemCount(): Int = noteData.size
@@ -36,7 +34,7 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     fun setData(newData: List<NoteData>) {
         val noteDiffUtil = NoteDiffUtil(noteData, newData)
         val diffUtilResult = DiffUtil.calculateDiff(noteDiffUtil)
-        this.noteData = newData
+        noteData = newData
         diffUtilResult.dispatchUpdatesTo(this)
     }
 

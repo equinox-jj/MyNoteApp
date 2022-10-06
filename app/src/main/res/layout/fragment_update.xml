@@ -5,7 +5,9 @@
 
     <data>
 
-
+        <variable
+            name="args"
+            type="com.mynoteapp.presentation.update.UpdateFragmentArgs" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +27,7 @@
             android:inputType="text"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:text="@{args.noteParcel.title}"
             android:textColor="@color/black"
             android:textColorHint="@color/ship_gray"
             android:textSize="16sp"
@@ -43,6 +46,7 @@
             android:entries="@array/spinner_priority"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:parsePriorityToInt="@{args.noteParcel.priority}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +66,7 @@
             android:paddingTop="10dp"
             android:paddingEnd="20dp"
             android:paddingBottom="10dp"
+            android:text="@{args.noteParcel.description}"
             android:textColor="@color/black"
             android:textColorHint="@color/ship_gray"
             app:layout_constraintBottom_toBottomOf="parent"

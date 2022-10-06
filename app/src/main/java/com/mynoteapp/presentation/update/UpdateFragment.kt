@@ -15,8 +15,8 @@ import androidx.navigation.fragment.navArgs
 import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentUpdateBinding
+import com.mynoteapp.presentation.NoteViewModel
 import com.mynoteapp.presentation.ShareViewModel
-import com.mynoteapp.presentation.list.NoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,8 +25,8 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
     private var _binding: FragmentUpdateBinding? = null
     private val binding get() = _binding!!
 
-    private val mShareViewModel: ShareViewModel by viewModels()
-    private val mNoteViewModel: NoteViewModel by viewModels()
+    private val noteVm: NoteViewModel by viewModels()
+    private val sharedVm: ShareViewModel by viewModels()
 
     private val args by navArgs<UpdateFragmentArgs>()
 
@@ -35,8 +35,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
         _binding = FragmentUpdateBinding.bind(view)
 
 //        binding.args = args
-//        binding.sUpdateNote.onItemSelectedListener = mShareViewModel.listener
-
+        binding.sUpdateNote.onItemSelectedListener = sharedVm.listener
 
     }
 
@@ -62,17 +61,16 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
         val descNote = binding.etUpdateNoteDesc.text.toString()
         val getPriority = binding.sUpdateNote.selectedItem.toString()
 
-        val validation = mShareViewModel.verifyDataFromUser(title, descNote)
+        val validation = sharedVm.verifyDataFromUser(title, descNote)
         if (validation) {
             val updateNoteData = NoteData(
                 args.noteParcel.id,
                 title,
                 descNote,
-                mShareViewModel.parsePriority(getPriority)
+                sharedVm.parsePriority(getPriority)
             )
-            mNoteViewModel.updateData(updateNoteData)
+            noteVm.updateData(updateNoteData)
             Toast.makeText(requireContext(), "Successfully Updated.", Toast.LENGTH_LONG).show()
-            // Navigate Back To List Fragment
             findNavController().navigate(R.id.action_updateFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), "Please Fill Out All Fields.", Toast.LENGTH_LONG)
@@ -80,13 +78,12 @@ class UpdateFragment : Fragment(R.layout.fragment_update), MenuProvider {
         }
     }
 
-    // Show Alert Dialog to Confirm Removal
     private fun deleteNote() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete '${args.noteParcel.title}?'")
         builder.setMessage("Are you sure you want to remove '${args.noteParcel.title}?'")
         builder.setPositiveButton("Yes") { _, _ ->
-            mNoteViewModel.deleteData(args.noteParcel)
+            noteVm.deleteData(args.noteParcel)
             Toast.makeText(
                 requireContext(),
                 "Successfully Removed: ${args.noteParcel.title}",

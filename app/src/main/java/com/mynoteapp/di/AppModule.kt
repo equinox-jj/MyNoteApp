@@ -3,6 +3,8 @@ package com.mynoteapp.di
 import android.content.Context
 import androidx.room.Room
 import com.mynoteapp.common.Constants.NOTE_DB_NAME
+import com.mynoteapp.data.repository.NoteRepository
+import com.mynoteapp.data.source.local.dao.NoteDao
 import com.mynoteapp.data.source.local.db.NoteDatabase
 import com.mynoteapp.domain.repository.INoteRepository
 import com.mynoteapp.domain.usecase.*
@@ -30,6 +32,10 @@ object AppModule {
     @Singleton
     @Provides
     fun providesNoteDao(database: NoteDatabase) = database.noteDao()
+
+    @Singleton
+    @Provides
+    fun providesRepository(noteDao: NoteDao): INoteRepository = NoteRepository(noteDao)
 
     @Singleton
     @Provides
