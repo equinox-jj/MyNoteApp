@@ -1,10 +1,13 @@
 # MyNoteApp 
 Kotlin Note App MVVM with Clean Architecture.
 
-# Build With:
-* [Navigation Component](https://developer.android.com/guide/navigation?gclsrc=ds&gclsrc=ds) to navigate between Fragments.
-* [Room Database](https://developer.android.com/training/data-storage/room) for the local database.
-* [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines?gclsrc=ds&gclsrc=ds) to perform asychronous programming.
+# Dependencies:
+* [Jetpack Navigation](https://developer.android.com/guide/navigation?gclsrc=ds&gclsrc=ds)
+* [Room Database](https://developer.android.com/training/data-storage/room)
+* [Kotlin Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+* [Live Data](https://developer.android.com/topic/libraries/architecture/livedata)
+* [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+* [Data Store](https://developer.android.com/topic/libraries/architecture/datastore)
 
 # Download Apk:
-* [GithubUserApps.apk](https://github.com/equinox-jj/MyNoteApp/raw/main/docs/MyNoteApps.apk)
+* [MyNoteApp.apk](https://github.com/equinox-jj/MyNoteApp/raw/main/docs/MyNoteApps.apk)
