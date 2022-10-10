@@ -11,7 +11,9 @@ import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.data.model.NotePriority
 
-class ShareViewModel(application: Application) : AndroidViewModel(application) {
+class SharedViewModel(
+    application: Application,
+) : AndroidViewModel(application) {
 
     val isDatabaseEmpty: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -39,13 +41,12 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
         description: String,
     ): Boolean = !(title.isEmpty() || description.isEmpty())
 
-
     fun parsePriority(priority: String): NotePriority {
         return when (priority) {
             "High Priority" -> NotePriority.HIGH
             "Medium Priority" -> NotePriority.MEDIUM
             "Low Priority" -> NotePriority.LOW
-            else -> NotePriority.LOW
+            else -> NotePriority.NONE
         }
     }
 

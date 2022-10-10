@@ -10,6 +10,5 @@ fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observ
             observer.onChanged(t)
             removeObserver(this)
         }
-
     })
 }

@@ -16,7 +16,7 @@ import com.mynoteapp.R
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentAddBinding
 import com.mynoteapp.presentation.NoteViewModel
-import com.mynoteapp.presentation.ShareViewModel
+import com.mynoteapp.presentation.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +26,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
     private val binding get() = _binding!!
 
     private val noteVm: NoteViewModel by viewModels()
-    private val sharedVm: ShareViewModel by viewModels()
+    private val sharedVm: SharedViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,7 +48,7 @@ class AddFragment : Fragment(R.layout.fragment_add) {
                 if (menuItem.itemId == R.id.check_add_item) {
                     insertDataToDatabase()
                 }
-                return true
+                return false
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
@@ -82,6 +82,11 @@ class AddFragment : Fragment(R.layout.fragment_add) {
             ).show()
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

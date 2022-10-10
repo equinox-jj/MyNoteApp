@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.mainNavHostFragment) as NavHostFragment
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.mainNavHostFragment) as NavHostFragment
         navController = navHostFragment.navController
 
         setupActionBarWithNavController(navController)
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.mainNavHostFragment)
+        navController = this.findNavController(R.id.mainNavHostFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 

@@ -39,6 +39,7 @@ object BindingAdapter {
             NotePriority.HIGH -> view.setSelection(0)
             NotePriority.MEDIUM -> view.setSelection(1)
             NotePriority.LOW -> view.setSelection(2)
+            else -> NotePriority.NONE
         }
     }
 
@@ -49,6 +50,7 @@ object BindingAdapter {
             NotePriority.HIGH -> view.setCardBackgroundColor(view.context.getColor(R.color.red))
             NotePriority.MEDIUM -> view.setCardBackgroundColor(view.context.getColor(R.color.yellow))
             NotePriority.LOW -> view.setCardBackgroundColor(view.context.getColor(R.color.green))
+            else -> NotePriority.NONE
         }
     }
 

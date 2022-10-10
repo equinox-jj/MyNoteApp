@@ -22,7 +22,7 @@ import com.mynoteapp.common.observeOnce
 import com.mynoteapp.data.model.NoteData
 import com.mynoteapp.databinding.FragmentListBinding
 import com.mynoteapp.presentation.NoteViewModel
-import com.mynoteapp.presentation.ShareViewModel
+import com.mynoteapp.presentation.SharedViewModel
 import com.mynoteapp.presentation.list.adapter.ListAdapter
 import com.mynoteapp.presentation.list.listener.SwipeToDelete
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +37,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     private val noteAdapter: ListAdapter by lazy { ListAdapter() }
 
     private val noteVm: NoteViewModel by viewModels()
-    private val sharedVm: ShareViewModel by viewModels()
+    private val sharedVm: SharedViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,14 +63,14 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
                     R.id.menu_delete_all -> confirmDelete()
-                    R.id.p_high_item -> {
-//                        mListAdapter.setData(it)
+                    R.id.p_high_item -> noteVm.sortByHighPriority.observe(viewLifecycleOwner) {
+                        noteAdapter.setData(it)
                     }
-                    R.id.p_low_item -> {
-//                        mListAdapter.setData(it)
+                    R.id.p_low_item -> noteVm.sortByLowPriority.observe(viewLifecycleOwner) {
+                        noteAdapter.setData(it)
                     }
                 }
-                return true
+                return false
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
@@ -120,7 +120,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     private fun restoreDeleteItem(view: View, deletedItem: NoteData) {
         val snackBar = Snackbar.make(
-            view, "Deleted '${deletedItem.title}'",
+            view,
+            "Deleted '${deletedItem.title}'",
             Snackbar.LENGTH_LONG
         )
         snackBar.setAction("Undo") {
@@ -169,4 +170,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
