@@ -7,4 +7,4 @@ Kotlin Note App MVVM with Clean Architecture.
 * [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines?gclsrc=ds&gclsrc=ds) to perform asychronous programming.
 
 # Download Apk:
-* [GithubUserApps.apk](https://github.com/equinox-jj/MyNoteApp/raw/main/docs/MyNoteApps.apk)
+* [MyNoteApp.apk](https://github.com/equinox-jj/MyNoteApp/raw/main/docs/MyNoteApps.apk)
